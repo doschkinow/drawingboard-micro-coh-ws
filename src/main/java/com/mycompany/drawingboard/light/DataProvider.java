@@ -151,8 +151,8 @@ public class DataProvider {
         shape1.setType(shape.getType());
         shape1.setX(shape.getX());
         shape1.setY(shape.getY());
-        //shape1.setColor(Shape.ShapeColor.YELLOW);
-        shape1.setColor(shape.getColor());
+        shape1.setColor(Shape.ShapeColor.YELLOW);
+        //shape1.setColor(shape.getColor());
 
         if (drawingsCache.containsKey(drawingId)) {
             return drawingsCacheNC.invoke(drawingId, //processShape(shape));
@@ -161,7 +161,7 @@ public class DataProvider {
 
                         if (drawing != null) {
                             drawing.getShapes().add(shape1);
-                            System.out.println("Version1: lambda called to " + drawing.getName());
+                            System.out.println("Version2: lambda called to " + drawing.getName());
 
                             entry.setValue(drawing);
                             return true;

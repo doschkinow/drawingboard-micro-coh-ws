@@ -105,26 +105,6 @@ public class DataProvider {
     }
 
     /**
-     * TO DO
-     *
-     * @param shape
-     * @return
-     */
-//    static InvocableMap.EntryProcessor<Integer, Drawing, Boolean> processShape(Shape shape) {
-//    	
-//    	return entry -> {
-//    	    
-//    		Drawing drawing = entry.getValue();	
-//    	    if(drawing != null) {
-//                drawing.getShapes().add(shape);
-//                entry.setValue(drawing);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//    	};
-//    }
-    /**
      * Add a new shape to the drawing.
      *
      * @param drawingId ID of the drawing the shape should be added to.
@@ -134,16 +114,7 @@ public class DataProvider {
      */
     public static synchronized boolean addShape(int drawingId, Shape shape) {
 
-        // JSR-107 Entry Processor
-//    	Cache<Integer, Drawing> drawingsCache = CacheService.getDrawingsCache();
-//
-//        if (drawingsCache.containsKey(drawingId)) {
-//            return (Boolean) drawingsCache.invoke(drawingId, new AddShapeProcessor(shape));
-//            
-//        } else {
-//            return false;
-//        }
-        //alternative: use a Lambda without explicit EntryProcessor 
+        //use a Lambda without explicit EntryProcessor 
         Cache<Integer, Drawing> drawingsCache = CacheService.getDrawingsCache();
         NamedCache<Integer, Drawing> drawingsCacheNC = drawingsCache.unwrap(NamedCache.class);
 

@@ -113,7 +113,6 @@ public class DataProvider {
      * drawing was found.
      */
     public static synchronized boolean addShape(int drawingId, Shape shape) {
-
         //use a Lambda without explicit EntryProcessor 
         Cache<Integer, Drawing> drawingsCache = CacheService.getDrawingsCache();
         NamedCache<Integer, Drawing> drawingsCacheNC = drawingsCache.unwrap(NamedCache.class);

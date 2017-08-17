@@ -28,4 +28,3 @@ restart-occs:
         rest_server_url: $REST_SERVER_URL
         function: $FUNCTION
         deployment_name: $DEPLOYMENT_NAME
-        

@@ -8,7 +8,7 @@ build:
     # Build microservice cache
     - script:
         name: Maven package one-jar
-        code: mvn -s /pipeline/source/settings.xml -Dsettings.security=/pipeline/source/master.xml package
+        code: mvn -version # -s /pipeline/source/settings.xml -Dsettings.security=/pipeline/source/master.xml package
 push:
   steps:
     # Push to public docker repo
@@ -28,3 +28,13 @@ restart-occs:
         rest_server_url: $REST_SERVER_URL
         function: $FUNCTION
         deployment_name: $DEPLOYMENT_NAME
+kubectl:
+  steps:
+    # execute kubectl command
+    - kubectl:
+          server: $MASTER
+          username: $USERNAME
+          password: $PASSWORD
+          insecure-skip-tls-verify: true
+          debug: true
+          command: get pod --all-namespaces -o wide

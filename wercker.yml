@@ -37,4 +37,4 @@ kubectl:
           password: $PASSWORD
           insecure-skip-tls-verify: true
           debug: true
-          command: get pod --all-namespaces -o wide
+          command: $COMMAND

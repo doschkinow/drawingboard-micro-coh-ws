@@ -28,3 +28,23 @@ restart-occs:
         rest_server_url: $REST_SERVER_URL
         function: $FUNCTION
         deployment_name: $DEPLOYMENT_NAME
+kubectl:
+  steps:
+    # execute kubectl command
+    - kubectl:
+          server: $MASTER
+          username: $USERNAME
+          password: $PASSWORD
+          insecure-skip-tls-verify: true
+          debug: false
+          command: get pod
+push-with-tag:
+  steps:
+    # Push to public docker repo
+    - internal/docker-push:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        tag: "1.1"
+        repository: $DOCKER_REPOSITORY
+        registry: $DOCKER_REGISTRY
+        entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.1-SNAPSHOT-jar-with-dependencies.jar

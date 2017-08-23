@@ -36,7 +36,7 @@ kubectl:
           username: $USERNAME
           password: $PASSWORD
           insecure-skip-tls-verify: true
-          debug: false
+          debug: true
           command: get pod
 push-with-tag:
   steps:

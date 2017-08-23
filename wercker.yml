@@ -38,7 +38,7 @@ kubectl:
           insecure-skip-tls-verify: true
           debug: false
           command: get pod
-push-k8s:
+push-with-tag:
   steps:
     # Push to public docker repo
     - internal/docker-push:

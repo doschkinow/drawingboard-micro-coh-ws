@@ -8,7 +8,7 @@ build:
     # Build microservice cache
     - script:
         name: Maven package one-jar
-        code: mvn -version -s /pipeline/source/settings.xml -Dsettings.security=/pipeline/source/master.xml package
+        code: mvn -s /pipeline/source/settings.xml -Dsettings.security=/pipeline/source/master.xml package
 push:
   steps:
     # Push to public docker repo

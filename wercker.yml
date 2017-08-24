@@ -40,7 +40,7 @@ kubectl:
           command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0
 push-with-tag:
   steps:
-    # Push to public docker repo
+    # Push to public docker repo 
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD

@@ -37,7 +37,7 @@ kubectl:
           password: $PASSWORD
           insecure-skip-tls-verify: true
           debug: false
-          command: get pod
+          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0
 push-with-tag:
   steps:
     # Push to public docker repo

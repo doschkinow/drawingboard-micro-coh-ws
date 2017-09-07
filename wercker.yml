@@ -4,11 +4,14 @@ build:
     # generate master   
     - script:
         name: master security settings
-        code: echo "<settingsSecurity><master>$MASTER</master></settingsSecurity>" > /pipeline/source/master.xml
+        code: echo "<settingsSecurity><master>$MASTER</master></settingsSecurity>" > master.xml
     # Build microservice cache
     - script:
         name: Maven package one-jar
-        code: mvn -s /pipeline/source/settings.xml -Dsettings.security=/pipeline/source/master.xml package
+        code: mvn -s settings.xml -Dsettings.security=master.xml package
+    - script:
+        name: clean up
+        code: rm master.xml
 push:
   steps:
     # Push to public docker repo
@@ -48,3 +51,17 @@ push-with-tag:
         repository: $DOCKER_REPOSITORY
         registry: $DOCKER_REGISTRY
         entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.1-SNAPSHOT-jar-with-dependencies.jar
+swarm-update-service:
+  steps:
+    # generate ssh key
+    - script:
+        name: put ssh key in a file
+        code: echo $SSHKEY_PART >> sshkey-part; echo '-----END RSA PRIVATE KEY-----' >> sshkey-part; chmod 600 sshkey-part
+    # update swarm service 
+    - script:
+        name: update swarm service
+        code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@129.144.150.24 docker service ls
+    # clean up
+    - script:
+        name: clean
+        code: rm sshkey-part

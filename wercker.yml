@@ -51,7 +51,7 @@ swarm-update-service:
     # update swarm service 
     - script:
         name: update swarm service
-        code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@129.144.150.24 docker service ls
+        code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@129.144.150.161 docker service update --image doschkinow/drawingboard-micro-coh-ws:1.1 ws
     # clean up
     - script:
         name: clean

@@ -55,5 +55,6 @@ swarm-update-service:
     # clean up
     - script:
         name: clean
-        code: rm sshkey-part   
+        code: rm sshkey-part
+        
         

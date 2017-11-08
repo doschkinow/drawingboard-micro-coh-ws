@@ -10,6 +10,9 @@ build:
         name: Maven package one-jar
         code: mvn -s settings.xml -Dsettings.security=master.xml package
     - script:
+        name: change file mode
+        code: chmod +x *.bash
+    - script:
         name: clean up
         code: rm master.xml
 push:
@@ -18,9 +21,9 @@ push:
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        tag: latest
+        tag: "1.1"
         repository: $DOCKER_REPOSITORY
-        registry: https://index.docker.io/v1/
+        registry: $DOCKER_REGISTRY
         #entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.wka=occs-occs-wkr-1 -Dcoherence.wka2=occs-occs-wkr-2 -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.1-SNAPSHOT-jar-with-dependencies.jar
         entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.1-SNAPSHOT-jar-with-dependencies.jar
 restart-occs:

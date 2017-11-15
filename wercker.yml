@@ -44,8 +44,7 @@ kubectl:
           password: $PASSWORD
           insecure-skip-tls-verify: true
           debug: false
-          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1
-          
+          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
 swarm-update-service:
   steps:
     # generate ssh key

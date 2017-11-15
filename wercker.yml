@@ -55,7 +55,7 @@ swarm-update-service:
     - script:
         name: update swarm service
         #code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@129.144.150.161 docker service update --image doschkinow/drawingboard-micro-coh-ws:1.1 ws
-        code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@m1-swarm-dd9qdpw5.srv.ravcloud.com docker service update --image doschkinow/drawingboard-micro-coh-ws:1.1 ws
+        code: ssh -i sshkey-part -o StrictHostKeyChecking=no ubuntu@m1-swarm-dd9qdpw5.srv.ravcloud.com docker service update --image doschkinow/drawingboard-micro-coh-ws:1.1 db_ws
     # clean up
     - script:
         name: clean

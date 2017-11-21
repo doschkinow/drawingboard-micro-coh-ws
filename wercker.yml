@@ -37,7 +37,7 @@ restart-occs:
         deployment_name: $DEPLOYMENT_NAME
 kubectl:
   steps:
-    # execute kubectl command
+    # execute kubectl command 
     - kubectl:
           server: $MASTER
           username: $USERNAME

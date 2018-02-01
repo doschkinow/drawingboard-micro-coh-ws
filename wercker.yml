@@ -45,6 +45,18 @@ kubectl:
           insecure-skip-tls-verify: true
           debug: false
           command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
+kubectl-oci:
+  steps:
+    - script:
+        name: put ssh key in a file
+        code: echo "$KUBECONFIG" > kubeconfig; chmod 600 kubeconfig; cat kubeconfig
+    # execute kubectl command
+    - kubectl:
+          debug: true
+          command: --set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
+    - script:
+        name: clean
+        code: rm kubeconfig
 swarm-update-service:
   steps:
     # generate ssh key

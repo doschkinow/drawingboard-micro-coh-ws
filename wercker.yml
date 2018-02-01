@@ -48,15 +48,15 @@ kubectl:
 kubectl-oci:
   steps:
     - script:
-        name: put ssh key in a file
-        code: echo "$KUBECONFIG" > kubeconfig; chmod 600 kubeconfig; cat kubeconfig
-    # execute kubectl command
-    - kubectl:
-          debug: true
-          command: --kubeconfig=./kubeconfig set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
+        name: put kubeconfig in a file
+        code: echo "$KUBERNETES_CONFIG" > kubeconfig; chmod 600 kubeconfig; cat kubeconfig; export KUBECONFIG=kubeconfig
     - kubectl:
           debug: true
           command: options      
+    # execute kubectl command
+    - kubectl:
+          debug: true
+          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
     - script:
         name: clean
         code: rm kubeconfig

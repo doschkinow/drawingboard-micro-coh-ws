@@ -53,7 +53,7 @@ kubectl-oci:
     # execute kubectl command
     - kubectl:
           debug: true
-          command: --set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
+          command: --kubeconfig=kubeconfig set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1       
     - script:
         name: clean
         code: rm kubeconfig

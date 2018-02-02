@@ -35,6 +35,16 @@ restart-occs:
         rest_server_url: $REST_SERVER_URL
         function: $FUNCTION
         deployment_name: $DEPLOYMENT_NAME
+kubectl-oci:
+  steps:
+    # execute kubectl command
+    - kubectl:
+          name: $KUBERNETES_OCI_INSTANCE
+          debug: true
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_TOKEN
+          insecure-skip-tls-verify: true
+          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0      
 kubectl:
   steps:
     # execute kubectl command     

@@ -24,8 +24,22 @@ function DrawingController($scope, $http, $routeParams) {
                         $scope.drawing = res.data;
                     });
         }
+        else if (data.fnPredictLocation) 
+            $scope.fnPredictLocation = data.fnPredictLocation;
         else
             $scope.drawShape(data);
+    };
+    $scope.prediction = "no prediction yet";
+    $scope.predict = function (evt) {
+        var canvas = document.getElementById("drawing");
+        var img = canvas.toDataURL().split("base64,")[1];
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", $scope.fnPredictLocation, true);
+        xhr.onreadystatechange = function() { 
+            if(this.readyState == XMLHttpRequest.DONE && this.status == 200) 
+                $scope.prediction = xhr.response; 
+        };
+        xhr.send(img);
     };
 
 

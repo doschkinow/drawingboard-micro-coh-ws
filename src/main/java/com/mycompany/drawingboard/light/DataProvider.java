@@ -168,7 +168,9 @@ public class DataProvider {
         webSockets.add(drawingId, session);
         try {
             Optional<String> loc = Optional.ofNullable(System.getenv("SSE_LOCATION"));
+            Optional<String> fn_loc = Optional.ofNullable(System.getenv("FN_PREDICT_LOCATION"));
             session.getBasicRemote().sendText("{\"sseLocation\":" + "\"" + loc.orElse("localhost:8080") + "\"" + "}");
+            session.getBasicRemote().sendText("{\"fnPredictLocation\":" + "\"" + fn_loc.orElse("nohost:noport") + "\"" + "}");
             Drawing drawing = getDrawing(drawingId);
             if (drawing != null && drawing.shapes != null) {
                 for (Shape shape : drawing.getShapes()) {

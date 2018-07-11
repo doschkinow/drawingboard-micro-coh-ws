@@ -21,7 +21,7 @@ push:
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        tag: "1.0"
+        tag: predict-${WERCKER_GIT_COMMIT}
         repository: $DOCKER_REPOSITORY
         registry: https://index.docker.io/v2/
         #entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.wka=occs-occs-wkr-1 -Dcoherence.wka2=occs-occs-wkr-2 -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
@@ -44,17 +44,7 @@ kubectl-oci:
           server: $KUBERNETES_MASTER
           token: $KUBERNETES_TOKEN
           insecure-skip-tls-verify: true
-          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0      
-kubectl:
-  steps:
-    # execute kubectl command     
-    - kubectl:
-          server: $MASTER
-          username: $USERNAME
-          password: $PASSWORD
-          insecure-skip-tls-verify: true
-          debug: false
-          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0
+          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:predict-${WERCKER_GIT_COMMIT}
 swarm-update-service:
   steps:
     # generate ssh key

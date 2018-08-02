@@ -5,6 +5,11 @@
 
 // Controller for the drawing editor page
 function DrawingController($scope, $http, $routeParams) {
+    google.charts.load('current', {'packages': ['bar']})
+    google.charts.setOnLoadCallback(function () {
+        console.log("google charts loaded!");
+    });
+
     $scope.drawingCanvas = document.getElementById('drawing');
     $scope.shapeType = "BIG_CIRCLE";
     if (navigator.appVersion.indexOf("Chrome") > 0)
@@ -23,8 +28,7 @@ function DrawingController($scope, $http, $routeParams) {
                     .then(function (res) {
                         $scope.drawing = res.data;
                     });
-        }
-        else if (data.fnPredictLocation) 
+        } else if (data.fnPredictLocation)
             $scope.fnPredictLocation = data.fnPredictLocation;
         else
             $scope.drawShape(data);
@@ -35,9 +39,15 @@ function DrawingController($scope, $http, $routeParams) {
         var img = canvas.toDataURL().split("base64,")[1];
         var xhr = new XMLHttpRequest();
         xhr.open("POST", $scope.fnPredictLocation, true);
-        xhr.onreadystatechange = function() { 
-            if(this.readyState == XMLHttpRequest.DONE && this.status == 200) 
-                $scope.prediction = xhr.response; 
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                var resp_array = xhr.response.split(" ").map(Number);
+                $scope.prediction = resp_array.shift();
+                $scope.probabilities = resp_array;
+                console.log($scope.probabilities);
+                $scope.drawChart();
+            }
+            ;
         };
         xhr.send(img);
     };
@@ -109,4 +119,32 @@ function DrawingController($scope, $http, $routeParams) {
         $scope.websocket.send(msg);
 
     }
+
+    $scope.drawChart = function () {
+        var dat = [];
+        dat.push(['Digit Probability', '']);
+        console.log($scope.probabilities);
+        for (var i = 1; i < 10; i++) {
+            dat.push([i.toString(), $scope.probabilities[i - 1]]);
+        }
+        dat.push(['0', $scope.probabilities[9]]);
+        var data = google.visualization.arrayToDataTable(dat);
+        var formatter = new google.visualization.NumberFormat({
+            pattern: '#.#####'
+        });
+        formatter.format(data, 1);
+        var options = {
+            chart: {
+                title: 'Prediction probabilities',
+                subtitle: ' ',
+            },
+            bars: 'vertical', // Required for Material Bar Charts.
+            height: 250,
+            legend: {position: 'none'}
+        };
+        var chart = new google.charts.Bar(document.getElementById('barchart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+    }
+
 }

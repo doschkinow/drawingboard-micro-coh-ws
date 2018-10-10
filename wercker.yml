@@ -70,4 +70,3 @@ swarm-update-service:
     - script:
         name: clean
         code: rm sshkey-part
-        

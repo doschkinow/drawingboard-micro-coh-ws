@@ -26,15 +26,6 @@ push:
         registry: https://index.docker.io/v2/
         #entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.wka=occs-occs-wkr-1 -Dcoherence.wka2=occs-occs-wkr-2 -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
         entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
-restart-occs:
-  steps:
-    # Manage Oracle Container Cloud Service container
-    - peternagy/oracle-occs-container-util:
-        occs_user: $OCCS_USER
-        occs_password: $OCCS_PASSWORD
-        rest_server_url: $REST_SERVER_URL
-        function: $FUNCTION
-        deployment_name: $DEPLOYMENT_NAME
 kubectl-oci:
   steps:
     # execute kubectl command

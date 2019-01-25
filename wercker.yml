@@ -28,6 +28,7 @@ push:
         entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
 kubectl-oci:
   steps:
+    #
     # execute kubectl command
     - kubectl:
           name: $KUBERNETES_OCI_INSTANCE

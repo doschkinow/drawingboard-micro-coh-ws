@@ -41,7 +41,7 @@ function DrawingController($scope, $http, $routeParams) {
         xhr.open("POST", $scope.fnPredictLocation, true);
         xhr.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                var resp_array = xhr.response.split(" ").map(Number);
+                var resp_array = xhr.response.replace(/"/g, '').split(" ").map(Number);
                 $scope.prediction = resp_array.shift();
                 $scope.probabilities = resp_array;
                 console.log($scope.probabilities);

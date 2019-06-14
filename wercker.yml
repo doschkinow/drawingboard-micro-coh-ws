@@ -38,3 +38,4 @@ kubectl-oci:
           command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.1
           
           
+          

@@ -38,4 +38,5 @@ kubectl-oci:
           insecure-skip-tls-verify: true
           command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:predict-${WERCKER_GIT_COMMIT}
           
+          
        

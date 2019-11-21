@@ -4,7 +4,7 @@
         <server>
             <id>maven.oracle.com</id>
             <username>peter.doschkinow@oracle.com</username>
-            <password>{ecSmq/zWQjMHM5/rD2TuadzlUVnH1IDgILDLmxPQHj0=}</password>
+            <password>{jsxyIf5kjbIHP3xzokpWsFVYItARPftlyn6+LS8EeEk=}</password>
             <configuration>
                 <basicAuthScope>
                     <host>ANY</host>

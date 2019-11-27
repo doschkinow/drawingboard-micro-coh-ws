@@ -39,6 +39,8 @@ kubectl-oci:
           command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:predict-${WERCKER_GIT_COMMIT}
 
 
+
+
           
           
           

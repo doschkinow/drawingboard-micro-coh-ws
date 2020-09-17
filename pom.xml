@@ -38,6 +38,7 @@
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-server</artifactId>
+            <version>${tyrus.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.glassfish.grizzly</groupId>
@@ -52,6 +53,7 @@
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-container-grizzly-server</artifactId>
+            <version>${tyrus.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.glassfish.grizzly</groupId>
@@ -150,6 +152,7 @@
 
     <properties>
         <jersey.version>2.19</jersey.version>
+        <tyrus.version>1.16</tyrus.version>
         <coherence.version>20.06</coherence.version>
         <jcache.version>1.0.0</jcache.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

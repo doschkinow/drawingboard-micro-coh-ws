@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: drawingboard-ws
-        image: doschkinow/drawingboard-micro-coh-ws:1.0
+        image: doschkinow/drawingboard-micro-coh-ws:one
         imagePullPolicy: Always
         env:
           - name: HOSTNAME

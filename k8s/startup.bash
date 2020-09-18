@@ -15,3 +15,4 @@ then
 fi
 
 java $options $wka_options -jar $jarfile
+

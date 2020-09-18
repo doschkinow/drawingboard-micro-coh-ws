@@ -22,7 +22,7 @@ spec:
           - name: SSE_LOCATION
             value: "sse.doschkinow.tk"
           - name: FN_PREDICT_LOCATION
-            value: "http://132.145.49.231:8080/t/predict/tf-python"
+            value: "http://132.145.49.231:8080/t/predict/tf-python-fdk"
 ---
 apiVersion: v1
 kind: Service

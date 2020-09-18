@@ -1,34 +1,25 @@
 box: combient/java-mvn
 build:
   steps:
-    # generate master   
-    - script:
-        name: master security settings
-        code: echo "<settingsSecurity><master>$MASTER</master></settingsSecurity>" > master.xml
     # Build microservice cache
     - script:
         name: Maven package one-jar
-        code: mvn -s settings.xml -Dsettings.security=master.xml package
+        code: mvn package
     - script:
         name: change file mode
-        code: chmod +x *.bash
-    - script:
-        name: clean up
-        code: rm master.xml
+        code: chmod +x k8s/*.bash
 push:
   steps:
-    # Push to public docker repo
+    # Push to public docker repository 
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        tag: predict-${WERCKER_GIT_COMMIT}
+        tag: predict
         repository: $DOCKER_REPOSITORY
-        registry: https://index.docker.io/v2/
-        #entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.wka=occs-occs-wkr-1 -Dcoherence.wka2=occs-occs-wkr-2 -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
-        entrypoint: java -Dcoherence.cluster="oracle's cluster" -Dcoherence.cacheconfig=drawingboard-coherence-cache-config.xml -Dcoherence.jcache.configuration.classname=passthrough -Dcoherence.distributed.localstorage=false -jar  /pipeline/source/target/drawingboard-micro-coh-ws-1.0-SNAPSHOT-jar-with-dependencies.jar
+        registry: https://index.docker.io/v1/
+        entrypoint: /pipeline/source/k8s/startup.bash
 kubectl-oci:
   steps:
-    #
     # execute kubectl command
     - kubectl:
           name: $KUBERNETES_OCI_INSTANCE
@@ -36,13 +27,7 @@ kubectl-oci:
           server: $KUBERNETES_MASTER
           token: $KUBERNETES_TOKEN
           insecure-skip-tls-verify: true
-          command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:predict-${WERCKER_GIT_COMMIT}
+    #     command: set image deployment/ws ws=docker.io/doschkinow/drawingboard-micro-coh-ws:1.0
+          command: apply -f /pipeline/source/k8s/drawingboard-ws.yaml
 
 
-
-
-          
-         
-          
-          
-       
